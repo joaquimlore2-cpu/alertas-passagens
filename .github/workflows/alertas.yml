@@ -18,6 +18,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-python@v5
         with:
@@ -38,4 +40,4 @@ jobs:
           git config user.email "alertas-bot@users.noreply.github.com"
           [ -f seen.json ] || exit 0
           git add seen.json
-          git diff --cached --quiet || (git commit -m "Atualiza histórico de alertas" && git push)
+          git diff --cached --quiet || (git commit -m "Atualiza histórico de alertas" && git pull --rebase origin main && git push)
