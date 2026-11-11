@@ -1,6 +1,7 @@
 {
   "feeds": [
     {"nome": "Melhores Destinos", "url": "https://www.melhoresdestinos.com.br/feed"},
+    {"nome": "Melhores Destinos Milhas", "url": "https://www.melhoresdestinos.com.br/milhas/feed"},
     {"nome": "Passageiro de Primeira", "url": "https://passageirodeprimeira.com/feed/"},
     {"nome": "Pontos pra Voar", "url": "https://pontospravoar.com/feed/"}
   ],
