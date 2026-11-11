@@ -1,0 +1,29 @@
+{
+  "feeds": [
+    {"nome": "Melhores Destinos", "url": "https://www.melhoresdestinos.com.br/feed"},
+    {"nome": "Passageiro de Primeira", "url": "https://passageirodeprimeira.com/feed/"},
+    {"nome": "Pontos pra Voar", "url": "https://pontospravoar.com/feed/"}
+  ],
+  "maximo_por_rodada": 8,
+  "ignorar_noticias_mais_velhas_que_horas": 48,
+  "filtros": {
+    "palavras_origem": ["curitiba", "cwb"],
+    "programas_principais": ["latam pass", "latampass"],
+    "bonus_minimo_latam": 60,
+    "bonus_minimo_outros_programas": 100,
+    "palavras_executiva": ["executiva", "classe executiva", "business class", "classe business", "primeira classe", "first class"],
+    "palavras_erro_tarifa": ["erro de tarifa", "tarifa erro", "error fare", "tarifa bugada"],
+    "palavras_voo": ["passagem", "passagens", "voo", "voos", "trecho", "trechos", "ida e volta", "resgate", "resgates", "emitir", "emissao", "tarifa", "tarifas", "milhas"],
+    "palavras_resgate_promocional": ["promocao", "promo", "desconto", "off", "tarifa promocional", "a partir de", "metade dos pontos", "pontos a menos"],
+    "palavras_preco": ["r$", "a partir de", "milhas", "pontos", "ida e volta"],
+    "destinos_internacionais": [
+      "internacional", "internacionais", "exterior",
+      "europa", "eua", "estados unidos", "orlando", "tampa", "miami", "nova york", "nova iorque", "las vegas", "los angeles", "boston", "chicago",
+      "canada", "toronto", "mexico", "cancun", "caribe", "punta cana", "aruba", "curacao", "panama",
+      "lisboa", "portugal", "madri", "barcelona", "espanha", "paris", "franca", "londres", "roma", "milao", "italia", "frankfurt", "amsterda", "zurique", "suica",
+      "buenos aires", "bariloche", "mendoza", "argentina", "santiago", "chile", "lima", "peru", "cusco", "bogota", "cartagena", "colombia", "montevideu", "punta del este", "uruguai",
+      "japao", "toquio", "dubai", "asia", "africa", "tailandia", "australia", "nova zelandia"
+    ],
+    "ignorar_se_titulo_tiver": ["hotel", "hoteis", "hospedagem", "hospedagens", "guia completo", "roteiro", "cruzeiro", "aluguel de carro", "seguro viagem", "greve"]
+  }
+}
