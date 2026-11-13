@@ -2,7 +2,7 @@ name: Alertas de passagens
 
 on:
   schedule:
-    - cron: "*/30 * * * *"   # a cada 30 minutos (o GitHub pode atrasar alguns minutos)
+    - cron: "*/10 * * * *"   # a cada 10 minutos (o GitHub pode atrasar alguns minutos)
   workflow_dispatch:          # botão "Run workflow" para rodar na hora
 
 permissions:
