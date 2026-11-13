@@ -27,22 +27,22 @@
       {
         "nome": "Europa",
         "area_id": "/m/02j9z",
-        "teto": 7000
+        "teto": 10000
       },
       {
         "nome": "Estados Unidos",
         "area_id": "/m/09c7w0",
-        "teto": 7000
+        "teto": 10000
       },
       {
         "nome": "América do Sul",
         "area_id": "/m/06n3y",
-        "teto": 4000
+        "teto": 5000
       },
       {
         "nome": "Oriente Médio",
         "area_id": "/m/04wsz",
-        "teto": 10000
+        "teto": 14000
       }
     ],
     "regras": {
