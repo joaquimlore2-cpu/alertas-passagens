@@ -1,9 +1,21 @@
 {
   "feeds": [
-    {"nome": "Melhores Destinos", "url": "https://www.melhoresdestinos.com.br/feed"},
-    {"nome": "Melhores Destinos Milhas", "url": "https://www.melhoresdestinos.com.br/milhas/feed"},
-    {"nome": "Passageiro de Primeira", "url": "https://passageirodeprimeira.com/feed/"},
-    {"nome": "Pontos pra Voar", "url": "https://pontospravoar.com/feed/"}
+    {
+      "nome": "Melhores Destinos",
+      "url": "https://www.melhoresdestinos.com.br/feed"
+    },
+    {
+      "nome": "Melhores Destinos Milhas",
+      "url": "https://www.melhoresdestinos.com.br/milhas/feed"
+    },
+    {
+      "nome": "Passageiro de Primeira",
+      "url": "https://passageirodeprimeira.com/feed/"
+    },
+    {
+      "nome": "Pontos pra Voar",
+      "url": "https://pontospravoar.com/feed/"
+    }
   ],
   "maximo_por_rodada": 8,
   "ignorar_noticias_mais_velhas_que_horas": 48,
@@ -12,10 +24,26 @@
     "ativo": true,
     "origem": "CWB",
     "regioes": [
-      {"nome": "Europa", "area_id": "/m/02j9z", "teto": 7000},
-      {"nome": "Estados Unidos", "area_id": "/m/09c7w0", "teto": 7000},
-      {"nome": "América do Sul", "area_id": "/m/06n3y", "teto": 4000},
-      {"nome": "Ásia e Oriente Médio", "area_id": "/m/0j0k", "teto": 10000}
+      {
+        "nome": "Europa",
+        "area_id": "/m/02j9z",
+        "teto": 7000
+      },
+      {
+        "nome": "Estados Unidos",
+        "area_id": "/m/09c7w0",
+        "teto": 7000
+      },
+      {
+        "nome": "América do Sul",
+        "area_id": "/m/06n3y",
+        "teto": 4000
+      },
+      {
+        "nome": "Oriente Médio",
+        "area_id": "/m/04wsz",
+        "teto": 10000
+      }
     ],
     "regras": {
       "percentual_abaixo_do_normal": 25,
@@ -28,25 +56,168 @@
     "parametros_extras": {}
   },
   "filtros": {
-    "palavras_origem": ["curitiba", "cwb"],
-    "programas_principais": ["latam pass", "latampass"],
+    "palavras_origem": [
+      "curitiba",
+      "cwb"
+    ],
+    "programas_principais": [
+      "latam pass",
+      "latampass"
+    ],
     "bonus_minimo_latam": 60,
     "bonus_minimo_outros_programas": 100,
-    "palavras_executiva": ["executiva", "classe executiva", "premium business", "business class", "classe business", "primeira classe", "first class"],
-    "palavras_erro_tarifa": ["erro de tarifa", "tarifa erro", "error fare", "tarifa bugada"],
-    "palavras_voo": ["passagem", "passagens", "voo", "voos", "trecho", "trechos", "ida e volta", "resgate", "resgates", "emitir", "emissao", "tarifa", "tarifas", "milhas"],
-    "palavras_resgate_promocional": ["promocao", "promo", "desconto", "off", "tarifa promocional", "a partir de", "metade dos pontos", "pontos a menos"],
-    "palavras_preco": ["r$", "a partir de", "milhas", "pontos", "ida e volta"],
-    "destinos_internacionais": [
-      "internacional", "internacionais", "exterior",
-      "europa", "eua", "estados unidos", "orlando", "tampa", "miami", "nova york", "nova iorque", "las vegas", "los angeles", "boston", "chicago",
-      "canada", "toronto", "mexico", "cancun", "caribe", "punta cana", "aruba", "curacao", "panama",
-      "lisboa", "portugal", "madri", "barcelona", "espanha", "paris", "franca", "londres", "roma", "milao", "italia", "frankfurt", "amsterda", "zurique", "suica",
-      "buenos aires", "bariloche", "mendoza", "argentina", "santiago", "chile", "lima", "peru", "cusco", "bogota", "cartagena", "colombia", "montevideu", "punta del este", "uruguai",
-      "japao", "toquio", "dubai", "asia", "africa", "tailandia", "australia", "nova zelandia"
+    "palavras_executiva": [
+      "executiva",
+      "classe executiva",
+      "premium business",
+      "business class",
+      "classe business",
+      "primeira classe",
+      "first class"
     ],
-    "ignorar_se_titulo_tiver": ["hotel", "hoteis", "hospedagem", "hospedagens", "cruzeiro", "aluguel de carro", "seguro viagem", "greve"],
-    "ignorar_se_titulo_comecar_com": ["como ", "por que", "porque", "o que ", "qual ", "quais ", "quanto ", "vale a pena", "review", "guia", "dicas", "entenda", "saiba", "conheca", "tudo sobre", "minha experiencia"],
-    "ignorar_sempre_se_titulo_tiver": ["guia completo", "passo a passo", "roteiro", "review", "vale a pena", "como emitir", "como usar", "como transferir", "como funciona", "dicas para", "melhores cartoes"]
+    "palavras_erro_tarifa": [
+      "erro de tarifa",
+      "tarifa erro",
+      "error fare",
+      "tarifa bugada"
+    ],
+    "palavras_voo": [
+      "passagem",
+      "passagens",
+      "voo",
+      "voos",
+      "trecho",
+      "trechos",
+      "ida e volta",
+      "resgate",
+      "resgates",
+      "emitir",
+      "emissao",
+      "tarifa",
+      "tarifas",
+      "milhas"
+    ],
+    "palavras_resgate_promocional": [
+      "promocao",
+      "promo",
+      "desconto",
+      "off",
+      "tarifa promocional",
+      "a partir de",
+      "metade dos pontos",
+      "pontos a menos"
+    ],
+    "palavras_preco": [
+      "r$",
+      "a partir de",
+      "milhas",
+      "pontos",
+      "ida e volta"
+    ],
+    "destinos_internacionais": [
+      "internacional",
+      "internacionais",
+      "exterior",
+      "europa",
+      "eua",
+      "estados unidos",
+      "orlando",
+      "tampa",
+      "miami",
+      "nova york",
+      "nova iorque",
+      "las vegas",
+      "los angeles",
+      "boston",
+      "chicago",
+      "canada",
+      "toronto",
+      "mexico",
+      "cancun",
+      "caribe",
+      "punta cana",
+      "aruba",
+      "curacao",
+      "panama",
+      "lisboa",
+      "portugal",
+      "madri",
+      "barcelona",
+      "espanha",
+      "paris",
+      "franca",
+      "londres",
+      "roma",
+      "milao",
+      "italia",
+      "frankfurt",
+      "amsterda",
+      "zurique",
+      "suica",
+      "buenos aires",
+      "bariloche",
+      "mendoza",
+      "argentina",
+      "santiago",
+      "chile",
+      "lima",
+      "peru",
+      "cusco",
+      "bogota",
+      "cartagena",
+      "colombia",
+      "montevideu",
+      "punta del este",
+      "uruguai",
+      "japao",
+      "toquio",
+      "dubai",
+      "asia",
+      "africa",
+      "tailandia",
+      "australia",
+      "nova zelandia"
+    ],
+    "ignorar_se_titulo_tiver": [
+      "hotel",
+      "hoteis",
+      "hospedagem",
+      "hospedagens",
+      "cruzeiro",
+      "aluguel de carro",
+      "seguro viagem",
+      "greve"
+    ],
+    "ignorar_se_titulo_comecar_com": [
+      "como ",
+      "por que",
+      "porque",
+      "o que ",
+      "qual ",
+      "quais ",
+      "quanto ",
+      "vale a pena",
+      "review",
+      "guia",
+      "dicas",
+      "entenda",
+      "saiba",
+      "conheca",
+      "tudo sobre",
+      "minha experiencia"
+    ],
+    "ignorar_sempre_se_titulo_tiver": [
+      "guia completo",
+      "passo a passo",
+      "roteiro",
+      "review",
+      "vale a pena",
+      "como emitir",
+      "como usar",
+      "como transferir",
+      "como funciona",
+      "dicas para",
+      "melhores cartoes"
+    ]
   }
 }

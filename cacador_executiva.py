@@ -249,7 +249,11 @@ def main() -> int:
 
     estado["uso"][mes_atual()] = uso_mes
 
-    alertas.sort(key=lambda a: a[0])
+    # um alerta por aeroporto (ex.: Miami e Fort Lauderdale saem os dois por MIA)
+    unicos = {}
+    for a in sorted(alertas, key=lambda a: a[0]):
+        unicos.setdefault(a[4], a)
+    alertas = list(unicos.values())
     enviados = 0
     for preco, d, motivo, regiao, chave in alertas[: CONFIG["maximo_de_alertas_por_rodada"]]:
         if enviar(montar_mensagem(d, preco, motivo, regiao)):
