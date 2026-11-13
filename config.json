@@ -49,7 +49,8 @@
       "percentual_abaixo_do_normal": 25,
       "minimo_de_observacoes": 4,
       "dias_sem_repetir_destino": 7,
-      "nova_queda_para_reavisar_percentual": 5
+      "nova_queda_para_reavisar_percentual": 5,
+      "percentual_para_possivel_erro_de_tarifa": 45
     },
     "maximo_de_alertas_por_rodada": 5,
     "limite_de_buscas_por_mes": 240,
@@ -78,8 +79,16 @@
     "palavras_erro_tarifa": [
       "erro de tarifa",
       "tarifa erro",
+      "tarifa-erro",
       "error fare",
-      "tarifa bugada"
+      "tarifa bugada",
+      "erro de preco",
+      "preco errado",
+      "erro na tarifa",
+      "tarifa com erro",
+      "glitch",
+      "bug de tarifa",
+      "tarifa de erro"
     ],
     "palavras_voo": [
       "passagem",
@@ -218,6 +227,52 @@
       "como funciona",
       "dicas para",
       "melhores cartoes"
-    ]
+    ],
+    "promocao_forte": {
+      "executiva_ida_e_volta_ate": 10000,
+      "internacional_longe_ida_e_volta_ate": 2500,
+      "america_do_sul_ida_e_volta_ate": 1300,
+      "nacional_saindo_de_curitiba_ida_e_volta_ate": 400,
+      "destinos_america_do_sul": [
+        "buenos aires",
+        "bariloche",
+        "mendoza",
+        "argentina",
+        "santiago",
+        "chile",
+        "lima",
+        "peru",
+        "cusco",
+        "bogota",
+        "cartagena",
+        "colombia",
+        "montevideu",
+        "punta del este",
+        "uruguai",
+        "assuncao",
+        "paraguai",
+        "la paz",
+        "bolivia",
+        "quito",
+        "equador",
+        "medellin",
+        "atacama",
+        "patagonia",
+        "ushuaia"
+      ],
+      "palavras_forte": [
+        "menor preco",
+        "preco historico",
+        "imperdivel",
+        "relampago",
+        "baixou muito",
+        "nunca vimos",
+        "precao",
+        "absurdo",
+        "inacreditavel",
+        "barato demais",
+        "menor tarifa"
+      ]
+    }
   }
 }

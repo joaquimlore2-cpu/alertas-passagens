@@ -130,9 +130,10 @@ def avaliar(d: dict, preco: float, regiao: dict, historico: list):
     abaixo_do_normal = normal and queda >= regras["percentual_abaixo_do_normal"]
 
     if abaixo_do_normal:
-        return (f"📉 {queda:.0f}% abaixo do normal (normalmente ~{formatar_reais(normal)})", normal)
+        return (f"📉 {queda:.0f}% abaixo do normal (normalmente ~{formatar_reais(normal)})", normal, queda)
     if abaixo_do_teto:
-        return (f"🎯 Abaixo do seu teto de {formatar_reais(regiao['teto'])} para {regiao['nome']}", normal)
+        queda_teto = (1 - preco / regiao["teto"]) * 100
+        return (f"🎯 Abaixo do seu teto de {formatar_reais(regiao['teto'])} para {regiao['nome']}", normal, queda_teto)
     return None
 
 
@@ -147,13 +148,16 @@ def ja_avisado_recente(info: dict, preco: float) -> bool:
     return dias < regras["dias_sem_repetir_destino"] and not caiu_mais
 
 
-def montar_mensagem(d: dict, preco: float, motivo: str, regiao: dict) -> str:
+def montar_mensagem(d: dict, preco: float, resultado: tuple, regiao: dict) -> str:
+    motivo, _, queda = resultado
+    possivel_erro = queda >= CONFIG["regras"]["percentual_para_possivel_erro_de_tarifa"]
     nome = d.get("name", "?")
     pais = d.get("country")
     aero = (d.get("destination_airport") or {}).get("code")
     titulo = f"Curitiba → {nome}" + (f", {pais}" if pais and pais != nome else "") + (f" ({aero})" if aero else "")
 
-    linhas = ["<b>💺 EXECUTIVA BARATA</b>", html.escape(titulo), ""]
+    cabecalho = "🚨 POSSÍVEL ERRO DE TARIFA — EXECUTIVA" if possivel_erro else "💺 EXECUTIVA BARATA"
+    linhas = [f"<b>{cabecalho}</b>", html.escape(titulo), ""]
     linhas.append(f"💰 <b>{formatar_reais(preco)}</b> ida e volta, por pessoa")
     linhas.append(html.escape(motivo))
     if d.get("start_date"):
@@ -170,6 +174,8 @@ def montar_mensagem(d: dict, preco: float, motivo: str, regiao: dict) -> str:
         detalhes.append(f"{h}h{m:02d} de viagem")
     if detalhes:
         linhas.append("✈️ " + html.escape(" · ".join(detalhes)))
+    if possivel_erro:
+        linhas += ["", "⚡ Corra: preço muito fora do normal costuma ser corrigido em poucas horas."]
     linhas += ["", "⚠️ Preço do Google Flights no momento da busca; confira antes de comprar.",
                f"🔗 <a href=\"{html.escape(link_google_flights(d), quote=True)}\">Ver no Google Flights</a>"]
     return "\n".join(linhas)
@@ -245,7 +251,7 @@ def main() -> int:
             info["obs"] = info["obs"][-MAX_OBS_POR_DESTINO:]
 
             if resultado and not ja_avisado_recente(info, preco):
-                alertas.append((preco, d, resultado[0], regiao, chave))
+                alertas.append((preco, d, resultado, regiao, chave))
 
     estado["uso"][mes_atual()] = uso_mes
 
@@ -255,8 +261,8 @@ def main() -> int:
         unicos.setdefault(a[4], a)
     alertas = list(unicos.values())
     enviados = 0
-    for preco, d, motivo, regiao, chave in alertas[: CONFIG["maximo_de_alertas_por_rodada"]]:
-        if enviar(montar_mensagem(d, preco, motivo, regiao)):
+    for preco, d, resultado, regiao, chave in alertas[: CONFIG["maximo_de_alertas_por_rodada"]]:
+        if enviar(montar_mensagem(d, preco, resultado, regiao)):
             enviados += 1
             if not TESTE:
                 estado["destinos"][chave]["ultimo_alerta"] = {"data": hoje, "p": preco}

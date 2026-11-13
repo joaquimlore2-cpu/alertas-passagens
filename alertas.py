@@ -65,6 +65,40 @@ def maior_bonus(texto: str) -> int:
     return max((int(x) for x in achados), default=0)
 
 
+def menor_preco_reais(t: str):
+    """Menor preço em R$ citado no título, já em ida e volta (trecho/só ida conta em dobro)."""
+    valores = []
+    for bruto in re.findall(r"r\$\s*(\d{1,3}(?:\.\d{3})*|\d+)(?:,\d{2})?", t):
+        valores.append(int(bruto.replace(".", "")))
+    if not valores:
+        return None
+    preco = min(valores)
+    if tem(t, ["trecho", "so ida", "somente ida", "apenas ida", "one-way"]) and not tem(t, ["ida e volta"]):
+        preco *= 2
+    return preco
+
+
+def e_promocao_forte(t: str, e_executiva: bool, e_internacional: bool, e_cwb: bool) -> bool:
+    """Promoção bem abaixo do normal pelo preço do título (ou palavras como 'menor preço da história')."""
+    pf = CONFIG["filtros"]["promocao_forte"]
+    if tem(t, pf["palavras_forte"]) and tem(t, ["r$", "passagem", "passagens", "voo", "voos"]):
+        return True
+    if tem(t, ["milhas", "pontos"]) and "r$" not in t:
+        return False  # resgates em milhas têm outra escala
+    preco = menor_preco_reais(t)
+    if not preco or preco < 50:
+        return False
+    if e_executiva:
+        return preco <= pf["executiva_ida_e_volta_ate"]
+    if e_internacional:
+        if tem(t, pf["destinos_america_do_sul"]):
+            return preco <= pf["america_do_sul_ida_e_volta_ate"]
+        return preco <= pf["internacional_longe_ida_e_volta_ate"]
+    if e_cwb:
+        return preco <= pf["nacional_saindo_de_curitiba_ida_e_volta_ate"]
+    return False
+
+
 def e_tutorial(t: str) -> bool:
     f = CONFIG["filtros"]
     if any(t.startswith(normalizar(p)) for p in f["ignorar_se_titulo_comecar_com"]):
@@ -93,6 +127,8 @@ def classificar(titulo: str, resumo: str):
 
     if e_erro and e_voo:
         return ("🚨 ERRO DE TARIFA", 0)
+    if e_voo and e_promocao_forte(t, e_executiva, e_internacional, e_cwb):
+        return ("🔥💺 EXECUTIVA EM PROMOÇÃO FORTE" if e_executiva else "🔥 PROMOÇÃO FORTE", 1)
     if e_executiva and e_voo:
         return ("💺 EXECUTIVA", 1)
     if e_latam and bonus >= f["bonus_minimo_latam"]:
@@ -210,6 +246,12 @@ def montar_mensagem(etiqueta: str, titulo: str, link: str, fonte: str, det: dict
     if det.get("validade"):
         linhas.append(f"⏳ Válido até: {html.escape(det['validade'])}")
     if linhas[-1] != "":
+        linhas.append("")
+    if etiqueta.startswith("🚨"):
+        linhas.append("⚡ Corra: erro de tarifa costuma durar poucas horas. Compre e só depois planeje o resto.")
+        linhas.append("")
+    elif etiqueta.startswith("🔥"):
+        linhas.append("⚡ Preço bem abaixo do normal: costuma acabar rápido.")
         linhas.append("")
     linhas.append(f"🔗 <a href=\"{html.escape(link, quote=True)}\">Ver oferta</a> · {html.escape(fonte)}")
     return "\n".join(linhas)
