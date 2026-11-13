@@ -1,0 +1,51 @@
+name: Caçador de executiva
+
+on:
+  schedule:
+    - cron: "47 10 * * *"   # 07:47 em Curitiba
+    - cron: "47 21 * * *"   # 18:47 em Curitiba
+  workflow_dispatch:
+    inputs:
+      teste:
+        description: "Modo teste (só mostra no log, não posta no canal)"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write             # para salvar o histórico de preços (precos.json)
+
+concurrency:
+  group: alertas              # mesma fila do robô dos blogs, para não brigarem ao salvar
+  cancel-in-progress: false
+
+jobs:
+  cacar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install requests==2.32.3
+
+      - name: Buscar executiva barata e enviar ao Telegram
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TESTE: ${{ github.event_name == 'workflow_dispatch' && inputs.teste && '1' || '0' }}
+        run: python cacador_executiva.py
+
+      - name: Salvar histórico de preços
+        if: always()
+        run: |
+          git config user.name "alertas-bot"
+          git config user.email "alertas-bot@users.noreply.github.com"
+          [ -f precos.json ] || exit 0
+          git add precos.json
+          git diff --cached --quiet || (git commit -m "Atualiza histórico de preços de executiva" && git pull --rebase origin main && git push)

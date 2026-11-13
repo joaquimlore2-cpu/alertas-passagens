@@ -8,6 +8,25 @@
   "maximo_por_rodada": 8,
   "ignorar_noticias_mais_velhas_que_horas": 48,
   "buscar_detalhes_na_pagina": true,
+  "executiva": {
+    "ativo": true,
+    "origem": "CWB",
+    "regioes": [
+      {"nome": "Europa", "area_id": "/m/02j9z", "teto": 7000},
+      {"nome": "Estados Unidos", "area_id": "/m/09c7w0", "teto": 7000},
+      {"nome": "América do Sul", "area_id": "/m/06n3y", "teto": 4000},
+      {"nome": "Ásia e Oriente Médio", "area_id": "/m/0j0k", "teto": 10000}
+    ],
+    "regras": {
+      "percentual_abaixo_do_normal": 25,
+      "minimo_de_observacoes": 4,
+      "dias_sem_repetir_destino": 7,
+      "nova_queda_para_reavisar_percentual": 5
+    },
+    "maximo_de_alertas_por_rodada": 5,
+    "limite_de_buscas_por_mes": 240,
+    "parametros_extras": {}
+  },
   "filtros": {
     "palavras_origem": ["curitiba", "cwb"],
     "programas_principais": ["latam pass", "latampass"],
